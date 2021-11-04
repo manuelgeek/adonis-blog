@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_name() }} - {{ title }}</title>
+    @entryPointStyles('app')
+    @entryPointScripts('app')
+  </head>
+  <body>
+    <div class="w-full h-screen flex justify-center flex-col items-center">
+
+      @!section('body')
+
+    <p class="text-center text-gray-500 text-xs">
+      &copy;2020 {{app_name()}}. All rights reserved.
+    </p>
+  </div>
+  </body>
+</html>
