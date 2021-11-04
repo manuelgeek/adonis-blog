@@ -22,11 +22,13 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async ({ view }) => {
   return view.render('welcome')
-})
+}).middleware('auth')
 
 Route.group(() => {
   Route.get('/register', 'RegisterController.registerView')
   Route.post('/register', 'RegisterController.register').as('register')
   Route.get('/login', 'LoginController.loginView').as('login.form')
   Route.post('/login', 'LoginController.login').as('login')
-}).namespace('App/Controllers/Http/Auth')
+})
+  .namespace('App/Controllers/Http/Auth')
+  .middleware('guest')
