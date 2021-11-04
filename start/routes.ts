@@ -24,6 +24,9 @@ Route.get('/', async ({ view }) => {
   return view.render('welcome')
 })
 
-Route.get('/login', async ({ view }) => {
-  return view.render('auth/login')
-})
+Route.group(() => {
+  Route.get('/register', 'RegisterController.registerView')
+  Route.post('/register', 'RegisterController.register').as('register')
+  Route.get('/login', 'LoginController.loginView').as('login.form')
+  Route.post('/login', 'LoginController.login').as('login')
+}).namespace('App/Controllers/Http/Auth')

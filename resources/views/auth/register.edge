@@ -1,0 +1,55 @@
+@layout('layouts/auth')
+
+@set('title', 'Register')
+
+@section('body')
+
+<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method='POST' action='{{ route('register') }}'>
+  <h1>Register</h1>
+  <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+      Name
+    </label>
+    <input name='name' class="shadow appearance-none border {{ flashMessages.has('errors.name') ? 'border-red-500' : ''}} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="name" placeholder="Name" value='{{flashMessages.get('name')?? ''}}'>
+    @if(flashMessages.has('errors.email'))
+      <p class="text-red-500 text-xs italic">{{flashMessages.get('errors.email')}}</p>
+    @endif
+  </div>
+  <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+      Email
+    </label>
+    <input name='email' class="shadow appearance-none border {{ flashMessages.has('errors.email') ? 'border-red-500' : ''}} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email" value="{{flashMessages.get('email') ?? ''}}">
+      @if(flashMessages.has('errors.email'))
+        <p class="text-red-500 text-xs italic">{{flashMessages.get('errors.email')}}</p>
+      @endif
+  </div>
+  <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+      Password
+    </label>
+    <input name='password' class="shadow appearance-none border {{ flashMessages.has('errors.password') ? 'border-red-500' : ''}} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="password">
+      @if(flashMessages.has('errors.password'))
+        <p class="text-red-500 text-xs italic">{{flashMessages.get('errors.password')}}</p>
+      @endif
+  </div>
+  <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="password-c">
+      Confirm Password
+    </label>
+    <input name='password_confirmation' class="shadow appearance-none border rounded {{ flashMessages.has('errors.password_confirmation') ? 'border-red-500' : ''}} w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password-c" type="password" placeholder="confirm password">
+      @if(flashMessages.has('errors.password_confirmation'))
+        <p class="text-red-500 text-xs italic">{{flashMessages.get('errors.password_confirmation')}}</p>
+      @endif
+  </div>
+  <div class="flex items-center justify-between">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+      Sign Up
+    </button>
+    <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="{{ route('login.form') }}">
+      Login
+    </a>
+  </div>
+</form>
+
+@end
