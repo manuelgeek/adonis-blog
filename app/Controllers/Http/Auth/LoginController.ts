@@ -23,4 +23,9 @@ export default class LoginController {
       throw new ValidationException(true, { email: ['Invalid email or password'] })
     }
   }
+
+  public async logout({ auth, response }: HttpContextContract) {
+    await auth.use('web').logout()
+    response.redirect('/login')
+  }
 }

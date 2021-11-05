@@ -8,7 +8,12 @@
   @entryPointScripts('app')
 </head>
 <body>
-
+  <nav class="flex justify-end p-4 space-x-3">
+    <p>{{ auth.user.name }}</p>
+    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    </form>
+  </nav>
   <main>
     <div>
       <h1 class="title text-green-500"> It Works! </h1>

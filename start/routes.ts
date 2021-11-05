@@ -25,10 +25,11 @@ Route.get('/', async ({ view }) => {
 }).middleware('auth')
 
 Route.group(() => {
-  Route.get('/register', 'RegisterController.registerView')
-  Route.post('/register', 'RegisterController.register').as('register')
-  Route.get('/login', 'LoginController.loginView').as('login.form')
-  Route.post('/login', 'LoginController.login').as('login')
-})
-  .namespace('App/Controllers/Http/Auth')
-  .middleware('guest')
+  Route.group(() => {
+    Route.get('/register', 'RegisterController.registerView')
+    Route.post('/register', 'RegisterController.register').as('register')
+    Route.get('/login', 'LoginController.loginView').as('login.form')
+    Route.post('/login', 'LoginController.login').as('login')
+  }).middleware('guest')
+  Route.post('/logout', 'LoginController.logout').as('logout').middleware('auth')
+}).namespace('App/Controllers/Http/Auth')
