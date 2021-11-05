@@ -57,14 +57,8 @@ B
 .env.example,d/4/d4dae00d11854b35292c2b8a30515a9a0aa2d871
 K
 database/factories/index.ts,8/f/8f6e0321679f522512a045683b9e3071b1e133ec
-O
-resources/views/auth/login.edge,f/4/f4d0e066ce05248df47bc58d14daaa18f3ee8802
 E
 resources/css/app.css,f/b/fb832949a8835b7bba860cb482ee63cd29bba09b
-\
-,app/Controllers/Http/Auth/LoginController.ts,2/a/2af076dbab21700205fd6f8d09abc4a742bfe2bd
-R
-"resources/views/auth/register.edge,c/7/c76224163f4841ad45bdc0c5132aa525860cb474
 Z
 *database/migrations/1636029238746_users.ts,0/d/0d7997743c96b21cab5ed24fbeb2068e756f6624
 >

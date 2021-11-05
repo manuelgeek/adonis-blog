@@ -1,34 +1,26 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { inspect } from 'util'
-import { schema, rules } from '@ioc:Adonis/Core/Validator';
+import { schema, ValidationException } from '@ioc:Adonis/Core/Validator'
 
 export default class LoginController {
   public async loginView({ view }) {
     return view.render('auth/login')
   }
 
-  public async register({ request }: HttpContextContract) {
+  public async login({ auth, request, response }: HttpContextContract) {
     const userSchema = schema.create({
-      name: schema.string({ trim: true }, [
-        rules.maxLength(50),
-      ]),
-      email: schema.string({ trim: true }, [rules.unique({ table: 'users', column: 'email' })]),
-      password: schema.string({}, [rules.minLength(8)])
-    });
-    console.log(request.all())
-    inspect(request.all())
-  }
+      email: schema.string({ trim: true }),
+      password: schema.string(),
+    })
+    await request.validate({ schema: userSchema })
 
+    const email = request.input('email')
+    const password = request.input('password')
 
-  public async login({ request }: HttpContextContract) {
-    const userSchema = schema.create({
-      name: schema.string({ trim: true }, [
-        rules.maxLength(50),
-      ]),
-      email: schema.string({ trim: true }, [rules.unique({ table: 'users', column: 'email' })]),
-      password: schema.string({}, [rules.minLength(8)])
-    });
-    console.log(request.all())
-    inspect(request.all())
+    try {
+      await auth.use('web').attempt(email, password)
+      response.redirect('/')
+    } catch {
+      throw new ValidationException(true, { email: ['Invalid email or password'] })
+    }
   }
 }
