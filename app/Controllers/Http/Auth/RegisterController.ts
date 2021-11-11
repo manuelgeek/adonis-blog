@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import User from 'App/Models/User'
+import Event from '@ioc:Adonis/Core/Event'
 
 export default class RegisterController {
   public async registerView({ view }) {
@@ -22,6 +23,8 @@ export default class RegisterController {
       },
     })
     const user = await User.create(request.except(['password_confirmation']))
+
+    Event.emit('new:user', user)
     await auth.use('web').login(user)
 
     return response.redirect().toPath('/')
